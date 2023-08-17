@@ -28,13 +28,7 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <!-- Small boxes (Stat box) -->
-                <div class="row">
-
-                </div>
-
-
-                <!-- /.row (main row) -->
+               @yield('content')
             </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->
