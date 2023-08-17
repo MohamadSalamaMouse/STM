@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BookRequest;
 use App\Models\Book;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,8 @@ class BookController extends Controller
      */
     public function index()
     {
-
+        $books = Book::all();
+        return view('admin.book.index', compact('books'));
     }
 
     /**
@@ -20,31 +22,30 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.book.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BookRequest $request)
     {
-        //
+     $request->validated();
+     Book::create($request->all());
+     return redirect()->route('Admin.book.index')->with('success', 'Book created successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Book $book)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Book $book)
     {
-        //
+        return view('admin.book.edit', compact('book'));
     }
 
     /**
@@ -52,7 +53,8 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        $book->update($request->all());
+        return redirect()->route('Admin.book.index')->with('success', 'Book updated successfully');
     }
 
     /**
@@ -60,6 +62,7 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $book->delete();
+        return redirect()->route('Admin.book.index')->with('success', 'Book deleted successfully');
     }
 }
