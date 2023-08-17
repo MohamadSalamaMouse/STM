@@ -38,7 +38,10 @@ class AuthorController extends Controller
     /**
      * Display the specified resource.
      */
+   public function show(Author $author)
+    {
 
+    }
     /**
      * Show the form for editing the specified resource.
      */
