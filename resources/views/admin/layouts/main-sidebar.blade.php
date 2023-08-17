@@ -45,7 +45,13 @@
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
-
+                    <a href="{{route('Admin.author.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-table"></i>
+                        <p>
+                            Author
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
 
                     </ul>
 

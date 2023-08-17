@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AuthorRequest;
 use App\Models\Author;
 use Illuminate\Http\Request;
 
@@ -27,10 +28,20 @@ class AuthorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AuthorRequest $request)
     {
         $request->validated();
-        Author::create($request->all());
+        $author=new  Author();
+        $author->name=$request->name;
+        $author->bio=$request->bio;
+
+        if($request->hasFile('image')){
+            $image=$request->file('image');
+            $imageName=time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('images'),$imageName);
+            $author->image=$imageName;
+        }
+        $author->save();
         return redirect()->route('Admin.author.index')->with('success', 'Author: Firstname Lastname successfully');
 
     }
@@ -64,7 +75,11 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
+        $image=$author->image;
         $author->delete();
+        if(file_exists(public_path('images/'.$image))){
+            unlink(public_path('images/'.$image));
+        }
         return redirect()->route('Admin.author.index')->with('success', 'Author: deleted successfully');
     }
 }
