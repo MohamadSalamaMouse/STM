@@ -23,6 +23,9 @@ class RedirectIfAuthenticated
             if (Auth::guard($guard)->check()) {
                 return redirect(RouteServiceProvider::HOME);
             }
+            if (Auth::guard($guard)->check() && $guard == 'Admin') {
+                return redirect()->route('Admin.index');
+            }
         }
 
         return $next($request);

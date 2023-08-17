@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
 
+namespace App\Http\Controllers;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
-class ProfileController extends Controller
+class AdminProfileController extends Controller
 {
     /**
      * Display the user's profile form.
@@ -17,7 +17,7 @@ class ProfileController extends Controller
     public function edit(Request $request): View
     {
 
-        return view('profile.edit', [
+        return view('admin.profile.edit', [
             'user' => $request->user(),
         ]);
     }
@@ -35,7 +35,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('Admin.profile.edit')->with('status', 'profile-updated');
     }
 
     /**
@@ -56,6 +56,6 @@ class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+        return redirect()->route('Admin.login');
     }
 }
