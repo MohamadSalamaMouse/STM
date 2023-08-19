@@ -18,9 +18,10 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('cover')->nullable();
             $table->decimal('price')->nullable();
+            $table->bigInteger('user_id')->unsigned()->nullable();
             $table->foreignId('author_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('category_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->boolean('borrow')->default(false);
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -20,5 +20,8 @@ class Book extends Model
         'category_id',
         'borrow',
     ];
+    public function author(){
+        return $this->belongsTo(Author::class);
+    }
 
 }

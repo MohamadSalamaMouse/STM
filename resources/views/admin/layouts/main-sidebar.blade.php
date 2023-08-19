@@ -52,6 +52,13 @@
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
+                    <a href="{{route('Admin.book.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-table"></i>
+                        <p>
+                            Book
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
 
                     </ul>
 

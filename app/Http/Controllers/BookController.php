@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BookRequest;
+use App\Models\Author;
 use App\Models\Book;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -12,8 +14,8 @@ class BookController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $books = Book::all();
+    {  $books = Book::all();
+
         return view('admin.book.index', compact('books'));
     }
 
@@ -22,7 +24,9 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('admin.book.create');
+        $authors=Author::all();
+        $categories=Category::all();
+        return view('admin.book.create',compact('authors','categories'));
     }
 
     /**
@@ -30,8 +34,22 @@ class BookController extends Controller
      */
     public function store(BookRequest $request)
     {
+
      $request->validated();
-     Book::create($request->all());
+
+     $book=new Book();
+     $book->title=$request->title;
+     $book->description=$request->description;
+     $book->price=$request->price;
+     $book->author_id=$request->author_id;
+     $book->category_id=$request->category_id;
+     if($request->hasFile('image')){
+         $image=$request->file('image');
+         $imageName=time().'.'.$image->getClientOriginalExtension();
+         $image->move(public_path('images/books'),$imageName);
+         $book->image=$imageName;
+     }
+     $book->save();
      return redirect()->route('Admin.book.index')->with('success', 'Book created successfully');
     }
 
@@ -66,7 +84,11 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
+        $image=$book->cover;
         $book->delete();
+        if(file_exists(public_path('images/books'.$image))){
+            unlink(public_path('images/books'.$image));
+        }
         return redirect()->route('Admin.book.index')->with('success', 'Book deleted successfully');
     }
 }

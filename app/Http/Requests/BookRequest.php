@@ -25,10 +25,8 @@ class BookRequest extends FormRequest
             'title' => ['required','string', 'max:255'],
             'description' => ['nullable','string', 'max:255'],
             'cover' => ['nullable','image','mimes:jpeg,png,jpg,gif,svg'],
-            'price' => ['nullable','numeric'],
-            'author_id' => ['required','exists:authors,id'],
-            'category_id' => ['required','exists:categories,id'],
-            'borrow' => ['nullable','boolean'],
+
+
         ];
     }
 }

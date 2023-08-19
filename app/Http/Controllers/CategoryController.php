@@ -40,9 +40,10 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-     public function show(Category $category)
+     public function show($id)
     {
-
+     $category=Category::findorfail($id);
+     return view('admin.category.View',compact('category'));
     }
 
     /**
