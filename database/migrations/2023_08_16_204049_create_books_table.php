@@ -18,10 +18,13 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('cover')->nullable();
             $table->decimal('price')->nullable();
-            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->foreignId('user_id')
+                ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->foreignId('author_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('category_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreign('user_id')->references('id')->on('users');
+
             $table->timestamps();
             $table->softDeletes();
         });
