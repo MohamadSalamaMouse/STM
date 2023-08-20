@@ -31,7 +31,7 @@
                         <tbody>
                         @foreach ($books as $book)
                             <tr>
-                                <td><img src="{{asset('images/book'.$book->cover)}}" width="100px" height="150px" alt="Author Image"></td>
+                                <td><img src="{{asset('images/books/'.$book->cover)}}" width="100px" height="150px" alt="Book Cover"></td>
                                 <td>{{$book->title}}</td>
                                 <td>{{$book->description}}</td>
                                 <td>{{$book->created_at}}</td>

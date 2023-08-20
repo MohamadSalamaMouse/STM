@@ -43,11 +43,11 @@ class BookController extends Controller
      $book->price=$request->price;
      $book->author_id=$request->author_id;
      $book->category_id=$request->category_id;
-     if($request->hasFile('image')){
-         $image=$request->file('image');
+     if($request->hasFile('cover')){
+         $image=$request->file('cover');
          $imageName=time().'.'.$image->getClientOriginalExtension();
          $image->move(public_path('images/books'),$imageName);
-         $book->image=$imageName;
+         $book->cover=$imageName;
      }
      $book->save();
      return redirect()->route('Admin.book.index')->with('success', 'Book created successfully');

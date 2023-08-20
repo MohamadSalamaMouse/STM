@@ -22,9 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('admin')->name('Admin.')->group(function () {
    Route::middleware('isAdmin')->group(function () {
 
-       Route::get('/dashboard',function (){
-           return view('Admin.layouts.master');
-       })->name('index');
+       Route::get('/dashboard',[BookController::class,'index'])->name('index');
 
        Route::resource('category',CategoryController::class);
        Route::resource('author',AuthorController::class);
