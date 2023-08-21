@@ -727,8 +727,8 @@
                             <a href="#">
                                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white relative">
                                     {{$book->title}}
-                                    <span class="absolute right-2 bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400 {{$book->user_id ? '' :'hidden'}}">
-                                        Category Name
+                                    <span class="absolute right-2 bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">
+                                        {{$book->category->title}}
                                     </span>
 
                                 
