@@ -19,16 +19,32 @@
         </div>
 
         <!-- SidebarSearch Form -->
-        <div class="form-inline">
+        <form class="form-inline" action="{{ route('Admin.search') }}" method="POST">
+            @csrf
             <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                <input class="form-control form-control-sidebar" type="search" placeholder="Search student by id" aria-label="Search" name="search">
                 <div class="input-group-append">
-                    <button class="btn btn-sidebar">
+                    <button class="btn btn-sidebar" type="submit">
                         <i class="fas fa-search fa-fw"></i>
                     </button>
                 </div>
             </div>
-        </div>
+        </form>
+
+        @if(isset($results))
+            <div>
+                <h2>Search Results</h2>
+                @if($results->isEmpty())
+                    <p>No results found.</p>
+                @else
+                    <ul>
+                        @foreach($results as $result)
+                            <li>{{ $result->name }}</li>
+                        @endforeach
+                    </ul>
+                @endif
+            </div>
+        @endif
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -55,12 +71,19 @@
                     <a href="{{route('Admin.book.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-table"></i>
                         <p>
-                            Book
+                           All Book
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <a href="{{route('Admin.users')}}" class="nav-link">
+                        <i class="nav-icon fas fa-table"></i>
+                        <p>
+                            All user
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
 
-                    </ul>
+            </ul>
 
                 </li>
 

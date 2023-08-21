@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,9 @@ Route::prefix('admin')->name('Admin.')->group(function () {
        Route::resource('category',CategoryController::class);
        Route::resource('author',AuthorController::class);
        Route::resource('book',BookController::class);
+       Route::get('borrow',[BookController::class,'borrow'])->name('book.borrow');
+       Route::get('users',[UserController::class,'index'])->name('users');
+       Route::post('search',[UserController::class,'search'])->name('search');
    });
     Route::middleware('auth:Admin')->group(function () {
         Route::get('/profile', [AdminProfileController::class, 'edit'])->name('profile.edit');

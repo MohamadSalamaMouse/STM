@@ -8,6 +8,19 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function index(){
+    $users = User::all();
+    return view('admin.student.index', compact('users'));
+
+    }
+    public  function search(Request $request){
+
+        $searchTerm = $request->input('search');
+
+        $results = User::where('id', $searchTerm)->get();
+
+        return view('admin.search_results', ['results' => $results]);
+    }
     public function show(User $user)
     {
         return view('user.books' , ['user' => $user]);
@@ -27,4 +40,5 @@ class UserController extends Controller
         ]);
         return back()->with(["success"=>"Book Was Returned Successfully!"]);
     }
+
 }

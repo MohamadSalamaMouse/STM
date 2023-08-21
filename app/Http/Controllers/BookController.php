@@ -6,6 +6,7 @@ use App\Http\Requests\BookRequest;
 use App\Models\Author;
 use App\Models\Book;
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -91,4 +92,11 @@ class BookController extends Controller
         }
         return redirect()->route('Admin.book.index')->with('success', 'Book deleted successfully');
     }
+
+    public function borrow(){
+        $books= Book::whereNotNull('user_id')->get();
+        return view('admin.book.borrow',compact('books'));
+
+    }
+
 }

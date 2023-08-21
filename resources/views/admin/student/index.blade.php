@@ -11,14 +11,16 @@
                     <table id="example2" class="table table-bordered table-hover">
                         <thead>
                         <tr>
+                            <th>id</th>
                             <th>Name</th>
                             <th>Email</th>
                             <td>created_at</td>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($students as $student)
+                        @foreach ($users as $student)
                             <tr>
+                                <td>{{$student->id}}</td>
                                 <td>{{$student->name}}</td>
                                 <td>{{$student->email}}</td>
                                 <td>{{$student->created_at}}</td>
