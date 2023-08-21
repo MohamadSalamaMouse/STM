@@ -25,6 +25,7 @@ Route::get('books/{book}' ,[BookController::class , 'show'])
 
 Route::post('book/{book}',[StudentController::class , 'borrow'])->name('user.borrow');
 Route::get('user/{user}/books',[StudentController::class , 'show'])->name('user.books');
+Route::post('user/book/{book}/return-back',[StudentController::class , 'returnBack'])->name('user.book.return');
 
 
 

@@ -12,11 +12,19 @@ class UserController extends Controller
     {
         return view('user.books' , ['user' => $user]);
     }
+
     public function borrow(Book $book)
     {
         $book->update([
             'user_id' => auth()->id()
         ]);
         return back();
+    }
+    public function returnBack(Book $book)
+    {
+        $book->update([
+            'user_id' => null
+        ]);
+        return back()->with(["success"=>"Book Was Returned Successfully!"]);
     }
 }
