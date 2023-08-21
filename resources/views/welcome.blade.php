@@ -718,10 +718,10 @@
 
                 <div class="mt-16 grid grid-cols-3 gap-4">
                     @foreach ($books as $book )
-                        
+
                     <div class=" relative max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                         <a href="#">
-                            <img class="rounded-t-lg" src="https://imageio.forbes.com/specials-images/imageserve/5f85be4ed0acaafe77436710/0x0.jpg?format=jpg&width=1200" alt="" />
+                            <img class="rounded-t-lg" src="{{asset("images/books/$book->cover")}}?format=jpg&width=1200" alt="" />
                         </a>
                         <div class="p-5">
                             <a href="#">
@@ -731,7 +731,7 @@
                                         Category Name
                                     </span>
 
-                                
+
                                 </h5>
                             </a>
                             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 pb-8 ">{{$book->description}}</p>

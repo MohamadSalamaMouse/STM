@@ -38,7 +38,7 @@
                                 <td><a href="{{route('Admin.author.show',$book->author_id)}}">{{$book->author_id}}</a></td>
                                 <td><a href="{{route('Admin.category.show',$book->category_id)}}">{{$book->category_id}}</a></td>
                                 <td>
-                                    @if($book->status)
+                                    @if($book->user_id)
                                         <p class="text-success">Borrowed</p>
                                     @else
                                         <p class="text-warning">Not Borrowed</p>
