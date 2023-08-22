@@ -67,7 +67,15 @@ class AuthorController extends Controller
      */
     public function update(Request $request, Author $author)
     {
-        $author->update($request->all());
+        $author->update($request->except('image'));
+        if($request->hasFile('image')){
+
+            $image=$request->file('image');
+            $imageName=time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('images'),$imageName);
+            $author->image=$imageName;
+            $author->save();
+        }
         return redirect()->route('Admin.author.index')->with('success', 'Author: updated successfully');
     }
 

@@ -68,7 +68,10 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        return view('admin.book.edit', compact('book'));
+        $book=Book::find($book->id);
+        $categories=Category::all();
+        $authors=Author::all();
+        return view('admin.book.edit', compact('book','categories','authors'));
     }
 
     /**
@@ -76,7 +79,14 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        $book->update($request->all());
+        $book->update($request->except('cover'));
+        if($request->hasFile('cover')){
+            $image=$request->file('cover');
+            $imageName=time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('images/books'),$imageName);
+            $book->cover=$imageName;
+            $book->save();
+        }
         return redirect()->route('Admin.book.index')->with('success', 'Book updated successfully');
     }
 
